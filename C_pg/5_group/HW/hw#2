@@ -12,7 +12,6 @@ struct Books {
     int Price;
     char borrow[30];
 };
-
 struct Books books[] = {
     {"Truth", "John", "Century", 300, 20000, "available"},
     {"Love", "Paul", "Goods", 200, 15000, "available"},
@@ -32,24 +31,19 @@ struct Books* search(const char* searchTitle) {
     return 0;
 }
 
-
 void borrow(struct Books* books) {
     if (strcasecmp(books->borrow, "available") == 0) {
-        printf("대출 되었습니다.\n");
+        printf("대출 되었습니다.\n\n");
         strcpy(books->borrow, "borrowing");
-        printf("%-8s%-8s%-8s%-8s%-8s%-8s\n", "Title", "Authors", "Press", "Page", "Price", "borrow");
-        printf("-----------------------------------------------------\n");
-
     }
     else {
-        printf("대출 중이라 대출 할 수 없습니다.\n\n\n");
-    }
+        printf("대출 중이라 대출 할 수 없습니다.\n\n");
+      }
 }
-
 
 void returnBOOK(struct Books* books) {
     if (strcasecmp(books->borrow, "borrowing") == 0) {
-        printf("책이 반납 되었습니다.\n");
+        printf("책이 반납 되었습니다.\n\n");
         strcpy(books->borrow, "available");
     }
     else {
@@ -63,7 +57,6 @@ int main() {
     while (choice != 5) {
         printf("1 [도서목록] 2 [검색] 3 [대출] 4 [반납] 5 [종료]");
         scanf("%d", &choice);
-
         if (choice == 1) {
             printf("%-8s%-8s%-8s%-8s%-8s\n", "Title", "Authors", "Press", "Page", "Price");
             printf("-----------------------------------------------------\n");
@@ -71,7 +64,6 @@ int main() {
                 printf("%-8s%-8s%-8s%-8d%-8d\n", books[i].Title, books[i].Authors, books[i].Press, books[i].Page, books[i].Price);
             }
             printf("\n\n");
-            
         }
         else if (choice == 2) {
             int flag = 0;
@@ -89,8 +81,7 @@ int main() {
             if (!flag) {
                 printf("보유하고 있지 않은 책 제목입니다.\n");
                 printf("\n\n");
-            }
-            
+            }         
         }
         else if (choice == 3) {
             char borrowtitle[30];
@@ -100,6 +91,8 @@ int main() {
             struct Books* borrowBook = search(borrowtitle);
             if (borrowBook != 0) {
                 borrow(borrowBook);
+                printf("%-8s%-8s%-8s%-8s%-8s%-8s\n", "Title", "Authors", "Press", "Page", "Price", "borrow");
+                printf("-----------------------------------------------------\n");
                 for (int i = 0; i < 5; i++) {
                     printf("%-8s%-8s%-8s%-8d%-8d%-8s\n", books[i].Title, books[i].Authors, books[i].Press, books[i].Page, books[i].Price, books[i].borrow);
                 }
@@ -108,8 +101,7 @@ int main() {
             else {
                 printf("보유하고 있지 않은 책 제목입니다.\n");
                 printf("\n\n");
-            }
-            
+            }          
         }
         else if (choice == 4) {
             char returntitle[30];
@@ -129,8 +121,7 @@ int main() {
             else {
                 printf("보유하고 있지 않은 책 제목입니다.\n");
                 printf("\n\n");
-            }
-            
+            }           
         }
         else if (choice == 5) {
             printf("프로그램을 종료합니다.\n");
